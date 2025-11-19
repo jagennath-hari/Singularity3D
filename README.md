@@ -9,7 +9,7 @@ Singularity3D synthesizes a full 3D world from a single image by combining a gen
 </div>
 
 ## 🖥️ Tested Configuration
-SpatialFusion-LM has been tested on:
+Singularity3D has been tested on:
 
 - 🐧 **Ubuntu:** 24.04  
 - 🧠 **GPU:** NVIDIA RTX A6000  

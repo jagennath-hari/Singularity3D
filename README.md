@@ -47,3 +47,19 @@ If you found this code/work to be useful in your own research, please considerin
     year={2024}
 }
 ```
+
+## 📄 License
+This project is released under the [BSD 3-Clause License](LICENSE).
+
+You may use, modify, and distribute this software freely, including in
+proprietary and commercial applications, as long as you retain the original
+copyright notice and do not use the project authors’ names for endorsement.
+
+
+## 🙏 Acknowledgement
+This work integrates several powerful research papers, libraries, and open-source tools:
+
+- [**CubeDiff**](https://cubediff.github.io/)
+- [**Spherical SfM**](https://jonathanventura.github.io/spherical-sfm/pages/iccv2025/)
+- [**Segment Anything**](https://segment-anything.com/)
+- [**Feature 3DGS**](https://feature-3dgs.github.io/) 

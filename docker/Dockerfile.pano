@@ -1,0 +1,38 @@
+# syntax=docker/dockerfile:1.19.0
+ARG BASE_FROM
+FROM ${BASE_FROM} AS pano-base
+
+
+# ------------------------------------------------------------------------------
+# Install all Python dependencies inside the conda env (with pip cache)
+# ------------------------------------------------------------------------------
+SHELL ["/bin/bash", "-lc"]
+
+ARG USERNAME=appuser
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+WORKDIR /home/${USERNAME}
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    source /opt/conda/etc/profile.d/conda.sh && \
+    conda activate singularity && \
+    git clone --recursive https://github.com/Juan5713/OpenCubeDiff.git /home/${USERNAME}/OpenCubeDiff && \
+    python -m pip install --upgrade pip --no-warn-script-location && \
+    CUDA_HOME='/usr/local/cuda' FORCE_CUDA="1" TORCH_CUDA_ARCH_LIST="8.6;8.7;8.9;9.0;10.0;12.0" pip install --no-warn-script-location --no-build-isolation \
+        torch torchvision --index-url https://download.pytorch.org/whl/cu130 && \
+        CUDA_HOME='/usr/local/cuda' FORCE_CUDA="1" TORCH_CUDA_ARCH_LIST="8.6;8.7;8.9;9.0;10.0;12.0" pip install --no-warn-script-location --no-build-isolation diffusers \
+        transformers \
+        accelerate \
+        safetensors \
+        pillow \
+        opencv-contrib-python \
+        py360convert \
+        einops \
+        wandb \
+        omegaconf \
+        hydra-core \
+        huggingface_hub \
+        filetype && \
+    conda clean -afy
+
+CMD ["/bin/bash"]

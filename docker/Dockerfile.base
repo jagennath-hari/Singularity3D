@@ -1,0 +1,69 @@
+# syntax=docker/dockerfile:1.19.0
+ARG BASE_FROM
+# ------------------------------------------------------------------------------
+# Stage 1 — get a clean Miniconda layout (pinned)
+# ------------------------------------------------------------------------------
+FROM continuumio/miniconda3:main AS conda
+
+# ------------------------------------------------------------------------------
+# Stage 2 — CUDA runtime + copy Miniconda in
+# ------------------------------------------------------------------------------
+FROM ${BASE_FROM} AS base
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=America/Los_Angeles
+ENV CONDA_DIR=/opt/conda
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+ENV PATH="${CONDA_DIR}/bin:${PATH}"
+
+# system packages
+RUN --mount=type=cache,target=/var/cache/apt \
+    --mount=type=cache,target=/var/lib/apt/lists \
+    apt-get update && apt-get install -y --no-install-recommends \
+        tzdata locales curl wget sudo git bzip2 ca-certificates bash unzip \
+        libgl1 \
+        libglib2.0-0 && \
+    ln -fs /usr/share/zoneinfo/$TZ /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata && \
+    locale-gen en_US.UTF-8 && \
+    rm -rf /var/lib/apt/lists/*
+
+
+# user args
+ARG USERNAME=appuser
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+# create user (done as root)
+RUN if ! getent group ${USER_GID} >/dev/null; then \
+      groupadd --gid ${USER_GID} ${USERNAME}; \
+    else \
+      groupname=$(getent group ${USER_GID} | cut -d: -f1); \
+      groupmod -n ${USERNAME} "$groupname"; \
+    fi \
+ && if ! id -u ${USER_UID} >/dev/null 2>&1; then \
+      useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME}; \
+    else \
+      olduser=$(getent passwd ${USER_UID} | cut -d: -f1); \
+      usermod -l ${USERNAME} -d /home/${USERNAME} -m "$olduser"; \
+    fi \
+ && echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
+ && chown -R ${USERNAME}:${USERNAME} /opt 
+
+# copy conda tree from official Miniconda stage (fast, reproducible)
+COPY --from=conda /opt/conda ${CONDA_DIR}
+
+# create env with conda and use buildkit cache for conda pkg downloads
+# note: this RUN uses a cache mount for $CONDA_DIR/pkgs
+RUN --mount=type=cache,target=${CONDA_DIR}/pkgs \
+    conda create -y -n singularity python=3.12 && \
+    echo ". ${CONDA_DIR}/etc/profile.d/conda.sh" >> /etc/bash.bashrc && \
+    echo "conda activate singularity" >> /etc/bash.bashrc && \
+    conda clean -afy
+
+# ------------------------------------------------------------------------------
+# default
+# ------------------------------------------------------------------------------
+CMD ["/bin/bash"]

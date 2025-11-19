@@ -1,0 +1,104 @@
+# syntax=docker/dockerfile:1.19.0
+ARG BASE_FROM
+FROM ${BASE_FROM} AS base-sfm
+
+RUN --mount=type=cache,target=/var/cache/apt \
+    --mount=type=cache,target=/var/lib/apt/lists \
+    apt-get -y update && apt-get -y install \
+    wget \
+    gdb \
+    unzip \
+    git \
+    cmake \
+    ninja-build \
+    python3-pip \
+    build-essential \
+    libboost-all-dev \
+    libeigen3-dev \
+    libgoogle-glog-dev \
+    libgsl-dev \
+    libtbb-dev \
+    libsuitesparse-dev \
+    libflann-dev \
+    libfreeimage-dev \
+    libmetis-dev \
+    libgtest-dev \
+    libsqlite3-dev \
+    libglew-dev \
+    libcgal-dev \
+    libc6-dbg \
+    python3-pandas && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /opencv_build
+RUN git clone -b 4.x https://github.com/opencv/opencv.git && \
+    git clone -b 4.x https://github.com/opencv/opencv_contrib.git && \
+    mkdir build && cd build && \
+    cmake -GNinja ../opencv \
+        -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules \
+        -DBUILD_opencv_hdf=OFF \
+        -DBUILD_TESTS=OFF \
+        -DBUILD_PERF_TESTS=OFF \
+    && ninja -j$(nproc) && ninja install
+
+
+WORKDIR /Ceres
+RUN wget http://ceres-solver.org/ceres-solver-2.2.0.tar.gz && \
+    tar -zxf ceres-solver-2.2.0.tar.gz && \
+    mkdir ceres-bin && \
+    cd ceres-bin && \
+    cmake ../ceres-solver-2.2.0 -DUSE_CUDA=OFF -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF -DBUILD_BENCHMARKS=OFF && \
+    make -j$(nproc) && \
+    make install
+
+WORKDIR /pose_lib
+RUN git clone https://github.com/vlarsson/PoseLib.git && \
+    mkdir PoseLib-build && cd PoseLib-build && \
+    cmake ../PoseLib && \
+    make -j$(nproc) && \
+    make install
+
+WORKDIR /openGV
+RUN git clone https://github.com/laurentkneip/opengv.git && \
+    cd opengv && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make -j$(nproc) && \
+    make install
+
+WORKDIR /Poly
+RUN git clone https://github.com/jonathanventura/polynomial.git && \
+    mkdir polynomial-build && cd polynomial-build && \
+    cmake ../polynomial && \
+    make -j$(nproc) && \
+    make install
+
+WORKDIR /COLMAP
+RUN wget https://github.com/colmap/colmap/archive/refs/tags/3.13.0.zip && \
+    unzip 3.13.0.zip && \
+    cd colmap-3.13.0 && \
+    mkdir build && \
+    cd build && \
+    cmake -GNinja .. -DGUI_ENABLED=OFF -DCUDA_ENABLED=ON -DCMAKE_CUDA_ARCHITECTURES="86;87;89;90;100;120" && \
+    ninja -j$(nproc) && ninja install
+
+WORKDIR /graph_optim
+RUN git clone https://github.com/jonathanventura/GraphOptim.git && \
+    cd GraphOptim  && \
+    mkdir build && cd build && \
+    cmake .. && \
+    make -j$(nproc) && \
+    make install
+
+WORKDIR /SphereSfM
+RUN git clone https://github.com/jonathanventura/spherical-sfm.git && \
+    cd spherical-sfm && \
+    mkdir build && cd build && \
+    cmake .. && \
+    make -j$(nproc)
+RUN chmod -R 777 /SphereSfM
+RUN echo 'export LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH}"' \
+    >> /etc/bash.bashrc
+    
+CMD ["/bin/bash"]

@@ -1,7 +1,12 @@
-# Singularity3D
-Single-image world synthesis using a generative panorama prior, orbit-conditioned spherical SfM, and Semantic 3D Gaussian scene reconstruction.
+# Singularity3D: World Synthesis with Spherical SfM and Feature 3DGS
 
+</div>
 
+<div align="justify">
+
+Singularity3D synthesizes a full 3D world from a single image by combining a generative panorama prior, an orbit-conditioned spherical SfM trajectory, and semantic 3D Gaussian scene reconstruction. The system expands a single view into a geometrically anchored, semantically structured 3D representation using spherical multi-view hallucination and feature-driven Gaussian splatting.
+
+</div>
 
 ## 📖 Citation
 If you found this code/work to be useful in your own research, please considering citing the following:

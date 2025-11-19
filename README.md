@@ -20,6 +20,28 @@ SpatialFusion-LM has been tested on:
 
 > A GPU with ≥ 24 GB of VRAM is recommended to ensure efficient handling of high-resolution inputs across all components.
 
+## 🚀 Quick Start
+
+1. Clone the repo
+
+```shell
+git clone https://github.com/jagennath-hari/Singularity3D.git && cd Singularity3D
+```
+
+2. Download [SAM ViT](https://segment-anything.com/) weights
+
+```shell
+bash download_sam.sh
+```
+
+3. Run the demo inside Docker
+```shell
+bash scripts/build_and_start.sh
+bash singularity.sh /data/example5.png
+```
+
+> Change input images by providing path from `/data` folder
+
 ## 📖 Citation
 If you found this code/work to be useful in your own research, please considering citing the following:
 

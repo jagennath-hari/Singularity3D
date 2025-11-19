@@ -8,6 +8,18 @@ Singularity3D synthesizes a full 3D world from a single image by combining a gen
 
 </div>
 
+## 🖥️ Tested Configuration
+SpatialFusion-LM has been tested on:
+
+- 🐧 **Ubuntu:** 24.04  
+- 🧠 **GPU:** NVIDIA RTX A6000  
+- ⚙️ **CUDA:** 13.0  
+- 🧊 **Environment:** Docker container with GPU support
+
+> Other modern Ubuntu + CUDA setups may work, but this is the validated reference configuration.
+
+> A GPU with ≥ 24 GB of VRAM is recommended to ensure efficient handling of high-resolution inputs across all components.
+
 ## 📖 Citation
 If you found this code/work to be useful in your own research, please considering citing the following:
 

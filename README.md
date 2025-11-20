@@ -52,28 +52,35 @@ bash view.sh /data/output/<basename>
 
 ## 📸 Pipeline Outputs
 
-<table>
+<table style="width:100%; table-layout:fixed;">
   <tr>
     <td align="center"><b>Input Image</b></td>
     <td align="center"><b>Generated Panorama</b></td>
   </tr>
-  <tr>
-    <td align="center">
-      <img src="data/example3.png" width="350"/>
+
+  <tr style="height:250px;">
+    <td>
+      <img src="data/example3.png"
+           style="width:100%; height:100%; object-fit:fill;"/>
     </td>
-    <td align="center">
-      <img src="assets/village.png" width="350"/>
+    <td>
+      <img src="assets/village.png"
+           style="width:100%; height:100%; object-fit:fill;"/>
     </td>
   </tr>
+
   <tr>
     <td colspan="2" align="center"><b>Feature 3DGS Reconstruction</b></td>
   </tr>
-  <tr>
-    <td colspan="2" align="center">
-      <img src="assets/village.gif" width="600"/>
+
+  <tr style="height:300px;">
+    <td colspan="2">
+      <img src="assets/village.gif"
+           style="width:100%; height:100%; object-fit:fill;"/>
     </td>
   </tr>
 </table>
+
 
 ## 📖 Citation
 If you found this code/work to be useful in your own research, please considering citing the following:

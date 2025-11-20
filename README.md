@@ -8,6 +8,10 @@ Singularity3D synthesizes a full 3D world from a single image by combining a gen
 
 </div>
 
+<p align="center">
+  <img src="assets/musem.gif" width="700" style="object-fit:fill;">
+</p>
+
 ## 🖥️ Tested Configuration
 Singularity3D has been tested on:
 

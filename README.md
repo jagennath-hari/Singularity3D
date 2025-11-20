@@ -52,31 +52,38 @@ bash view.sh /data/output/<basename>
 
 ## 📸 Pipeline Outputs
 
-<table style="width:100%; table-layout:fixed;">
+<table>
+  <!-- Header row -->
   <tr>
-    <td align="center"><b>Input Image</b></td>
-    <td align="center"><b>Generated Panorama</b></td>
+    <td align="center" width="400" height="300"><b>Input Image</b></td>
+    <td align="center" width="400" height="300"><b>Generated Panorama</b></td>
   </tr>
 
-  <tr style="height:250px;">
-    <td>
+  <!-- Input + Panorama images -->
+  <tr>
+    <td width="400" height="300">
       <img src="data/example3.png"
-           style="width:100%; height:100%; object-fit:fill;"/>
+           width="400" height="300"
+           style="object-fit:fill;">
     </td>
-    <td>
+    <td width="400" height="300">
       <img src="assets/village.png"
-           style="width:100%; height:100%; object-fit:fill;"/>
+           width="400" height="300"
+           style="object-fit:fill;">
     </td>
   </tr>
 
+  <!-- 3DGS label -->
   <tr>
-    <td colspan="2" align="center"><b>Feature 3DGS Reconstruction</b></td>
+    <td colspan="2" align="center" width="800" height="500"><b>Feature 3DGS Reconstruction</b></td>
   </tr>
 
-  <tr style="height:300px;">
-    <td colspan="2">
+  <!-- 3DGS GIF -->
+  <tr>
+    <td colspan="2" width="800" height="500">
       <img src="assets/village.gif"
-           style="width:100%; height:100%; object-fit:fill;"/>
+           width="800" height="500"
+           style="object-fit:fill;">
     </td>
   </tr>
 </table>

@@ -63,12 +63,10 @@ bash view.sh /data/output/<basename>
   <tr>
     <td width="400" height="300">
       <img src="data/example3.png"
-           width="400" height="300"
-           style="object-fit:fill;">
+           style="width:400px; height:300px; object-fit:fill;">
     </td>
     <td width="400" height="300">
       <img src="assets/village.png"
-           width="400" height="300"
            style="width:400px; height:300px; object-fit:fill;">
     </td>
   </tr>
@@ -82,11 +80,11 @@ bash view.sh /data/output/<basename>
   <tr>
     <td colspan="2" width="800" height="500">
       <img src="assets/village.gif"
-           width="800" height="500"
-           style="object-fit:fill;">
+           style="width:800px; height:500px; object-fit:fill;">
     </td>
   </tr>
 </table>
+
 
 
 ## 📖 Citation

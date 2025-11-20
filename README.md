@@ -69,7 +69,7 @@ bash view.sh /data/output/<basename>
     <td width="400" height="300">
       <img src="assets/village.png"
            width="400" height="300"
-           style="object-fit:fill;">
+           style="width:400px; height:300px; object-fit:fill;">
     </td>
   </tr>
 

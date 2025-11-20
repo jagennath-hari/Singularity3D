@@ -42,6 +42,14 @@ bash singularity.sh /data/example5.png
 
 > Change input images by providing path from `/data` folder
 
+## 🔭 Visualizing the 3D Gaussian Scene
+
+Use the provided viewer script to visualize the generated Gaussian scene:
+
+```bash
+bash view.sh /data/output/<basename>
+```
+
 ## 📖 Citation
 If you found this code/work to be useful in your own research, please considering citing the following:
 

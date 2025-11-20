@@ -55,8 +55,8 @@ bash view.sh /data/output/<basename>
 <table>
   <!-- Header row -->
   <tr>
-    <td align="center" width="400" height="100"><b>Input Image</b></td>
-    <td align="center" width="400" height="100"><b>Generated Panorama</b></td>
+    <td align="center" width="400" height="30"><b>Input Image</b></td>
+    <td align="center" width="400" height="30"><b>Generated Panorama</b></td>
   </tr>
 
   <!-- Input + Panorama images -->
@@ -75,7 +75,7 @@ bash view.sh /data/output/<basename>
 
   <!-- 3DGS label -->
   <tr>
-    <td colspan="2" align="center" width="800" height="100"><b>Feature 3DGS Reconstruction</b></td>
+    <td colspan="2" align="center" width="800" height="30"><b>Feature 3DGS Reconstruction</b></td>
   </tr>
 
   <!-- 3DGS GIF -->

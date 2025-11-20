@@ -52,6 +52,8 @@ bash view.sh /data/output/<basename>
 
 ## 📸 Pipeline Outputs
 
+### Village 
+
 <table>
   <!-- Header row -->
   <tr>

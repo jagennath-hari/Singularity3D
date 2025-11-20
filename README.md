@@ -54,7 +54,7 @@ Use the provided viewer script to visualize the generated Gaussian scene:
 bash view.sh /data/output/<basename>
 ```
 
-## 📸 Pipeline Outputs
+## 📸 Pipeline Outputs (SAM)
 
 ### Village 
 

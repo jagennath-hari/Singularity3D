@@ -23,7 +23,6 @@ colmap exhaustive_matcher \
     --database_path $OUT/$BASENAME/database.db \
     --ExhaustiveMatching.block_size=10
 
-# --- Automatic gdb debug wrapper ---
 cd /home/$(whoami)
 
 /SphereSfM/spherical-sfm/build/examples/run_spherical_sfm_uncalib \

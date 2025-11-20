@@ -87,7 +87,40 @@ bash view.sh /data/output/<basename>
   </tr>
 </table>
 
+### Coralreef
 
+<table>
+  <!-- Header row -->
+  <tr>
+    <td align="center" width="400" height="30"><b>Input Image</b></td>
+    <td align="center" width="400" height="30"><b>Generated Panorama</b></td>
+  </tr>
+
+  <!-- Input + Panorama images -->
+  <tr>
+    <td width="400" height="300">
+      <img src="data/example2.jpeg"
+           style="width:400px; height:300px; object-fit:fill;">
+    </td>
+    <td width="400" height="300">
+      <img src="assets/coralreef.png"
+           style="width:400px; height:300px; object-fit:fill;">
+    </td>
+  </tr>
+
+  <!-- 3DGS label -->
+  <tr>
+    <td colspan="2" align="center" width="800" height="30"><b>Feature 3DGS Reconstruction</b></td>
+  </tr>
+
+  <!-- 3DGS GIF -->
+  <tr>
+    <td colspan="2" width="800" height="500">
+      <img src="assets/coralreef.gif"
+           style="width:800px; height:500px; object-fit:fill;">
+    </td>
+  </tr>
+</table>
 
 ## 📖 Citation
 If you found this code/work to be useful in your own research, please considering citing the following:

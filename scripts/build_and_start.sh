@@ -117,6 +117,7 @@ docker run -it --rm \
   -v $(pwd)/data:/data \
   -v $(pwd)/src/pano_diff.py:/home/"${USERNAME}"/OpenCubeDiff/pano_diff.py \
   -v $(pwd)/src/singularity.sh:/home/"${USERNAME}"/singularity.sh \
+  -v $(pwd)/src/view.sh:/home/"${USERNAME}"/view.sh \
   -v $(pwd)/weights/sam_vit_h_4b8939.pth:/home/"${USERNAME}"/feature-3dgs/encoders/sam_encoder/checkpoints/sam_vit_h_4b8939.pth \
   --user "${HOST_UID}:${HOST_GID}" \
   "${RUN_IMAGE}"

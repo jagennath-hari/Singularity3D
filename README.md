@@ -1,4 +1,4 @@
-# Singularity3D: World Synthesis with Spherical SfM and Feature 3DGS
+# Singularity3D: World Synthesis with Feature Gaussians
 
 </div>
 
